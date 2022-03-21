@@ -6,7 +6,7 @@ const MyDocument = () => {
       <Head>
         <meta name="application-name" content="MyApp" />
       </Head>
-      <body>
+      <body style={{background: "#F8F8F8"}}>
         <Main />
         <NextScript />
       </body>

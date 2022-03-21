@@ -2,8 +2,6 @@ import type { NextPage } from "next";
 import Head from "next/head";
 
 import * as React from "react";
-import { styled } from "@mui/material/styles";
-import Paper from "@mui/material/Paper";
 import Box from "@mui/material/Box";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
@@ -11,6 +9,9 @@ import Typography from "@mui/material/Typography";
 import Grid from "@mui/material/Grid";
 import CardMedia from "@mui/material/CardMedia";
 import { Link } from "@mui/material";
+import Button from "@mui/material/Button";
+
+import SideBar from "../components/sideBar";
 
 const bull = (
   <Box
@@ -21,11 +22,19 @@ const bull = (
   </Box>
 );
 
-const BookCard = (props): JSX.Element => {
+const BookCard = (props: {
+  data:
+    | boolean
+    | React.ReactChild
+    | React.ReactFragment
+    | React.ReactPortal
+    | null
+    | undefined;
+}): JSX.Element => {
   return (
     <>
       <Link href="#" underline="none">
-        <Card sx={{ minWidth: 275 }}>
+        <Card sx={{ minWidth: 50}} variant="elevation">
           <CardContent>
             <Typography
               sx={{ fontSize: 18, fontweight: "bold", textAlign: "center" }}
@@ -41,6 +50,11 @@ const BookCard = (props): JSX.Element => {
               alt="Book Cover"
               sx={{ objectFit: "scale-down" }}
             />
+            <div style={{ textAlign: "center", padding: "10px 0px" }}>
+              <div>
+                <Button variant="contained">残数: 1</Button>
+              </div>
+            </div>
           </CardContent>
         </Card>
       </Link>
@@ -56,26 +70,28 @@ const Home: NextPage = () => {
   }, []);
 
   return (
-    <Grid item xs={8}>
-      <div>
-        <Head>
-          <title>Index Page</title>
-        </Head>
-        <main style={{ padding: "100px 100px" }}>
-          <Box sx={{ flexGrow: 1 }}>
-            <Grid container spacing={3}>
-              {data.map(
-                (_, index): JSX.Element => (
-                  <Grid item xs={2} key={index}>
-                    <BookCard data={_} />
-                  </Grid>
-                )
-              )}
-            </Grid>
-          </Box>
-        </main>
-      </div>
-    </Grid>
+    <SideBar>
+      <Grid item xs={8}>
+        <div>
+          <Head>
+            <title>Index Page</title>
+          </Head>
+          <main style={{ padding: "100px 100px" }}>
+            <Box sx={{ flexGrow: 1 }}>
+              <Grid container spacing={3}>
+                {data.map(
+                  (_, index): JSX.Element => (
+                    <Grid item xs={2} key={index}>
+                      <BookCard data={_} />
+                    </Grid>
+                  )
+                )}
+              </Grid>
+            </Box>
+          </main>
+        </div>
+      </Grid>
+    </SideBar>
   );
 };
 
