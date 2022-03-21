@@ -10,6 +10,7 @@ import Grid from "@mui/material/Grid";
 import CardMedia from "@mui/material/CardMedia";
 import { Link } from "@mui/material";
 import Button from "@mui/material/Button";
+import Modal from "@mui/material/Modal";
 
 import SideBar from "../components/sideBar";
 
@@ -22,6 +23,18 @@ const bull = (
   </Box>
 );
 
+const style = {
+  position: "absolute" as "absolute",
+  top: "35%",
+  left: "50%",
+  transform: "translate(-50%, -50%)",
+  width: 700,
+  bgcolor: "background.paper",
+  border: "1px #000",
+  boxShadow: 12,
+  p: 4,
+};
+
 const BookCard = (props: {
   data:
     | boolean
@@ -31,10 +44,14 @@ const BookCard = (props: {
     | null
     | undefined;
 }): JSX.Element => {
+  const [open, setOpen] = React.useState(false);
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
+
   return (
     <>
       <Link href="#" underline="none">
-        <Card sx={{ minWidth: 50}} variant="elevation">
+        <Card sx={{ minWidth: 50 }} variant="elevation">
           <CardContent>
             <Typography
               sx={{ fontSize: 18, fontweight: "bold", textAlign: "center" }}
@@ -52,7 +69,38 @@ const BookCard = (props: {
             />
             <div style={{ textAlign: "center", padding: "10px 0px" }}>
               <div>
-                <Button variant="contained">残数: 1</Button>
+                <Button
+                  onClick={handleOpen}
+                  variant="contained"
+                  color="success"
+                  fullWidth
+                >
+                  残数: 1
+                </Button>
+                <Modal
+                  open={open}
+                  onClose={handleClose}
+                  aria-labelledby="modal-modal-title"
+                  aria-describedby="modal-modal-description"
+                >
+                  <Box sx={style}>
+                    <Typography
+                      id="modal-modal-title"
+                      variant="h6"
+                      component="h2"
+                    >
+                      貸出処理
+                    </Typography>
+                    <Typography id="modal-modal-description" sx={{ mt: 2 }}>
+                      「タイトル」を2022/03/21 ~
+                      2022/03/27の期間で貸出を行います。
+                      処理を続行してよろしいですか？
+                    </Typography>
+                    <div style={{ textAlign: "right" }}>
+                      <Button variant="contained" color="success">借りる</Button>
+                    </div>
+                  </Box>
+                </Modal>
               </div>
             </div>
           </CardContent>
