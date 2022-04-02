@@ -1,4 +1,5 @@
 module.exports = function (...args) {
+  const env = require(`./config/${process.env.APP_ENV || 'local'}.json`)
   let original = require("./next.config.original.1648124561154.js");
   const finalConfig = {};
   const target = { target: "serverless" };
@@ -20,6 +21,13 @@ module.exports = function (...args) {
   } else if (typeof original === "object") {
     Object.assign(finalConfig, original);
   }
+  Object.assign(finalConfig, env);
   Object.assign(finalConfig, target);
   return finalConfig;
 };
+
+module.exports = {
+  env: {
+    ...require(`./config/${process.env.APP_ENV || 'dev'}.json`),
+  },
+}

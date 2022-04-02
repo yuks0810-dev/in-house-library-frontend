@@ -108,9 +108,10 @@ const Home: NextPage = () => {
   const [data, setData] = React.useState([]);
 
   React.useEffect(() => {
-    fetch("http://localhost:5001/books")
+    fetch(`${process.env.NEXT_PUBLIC_API_ORIGIN}/books`)
       .then((res) => res.json())
       .then((response) => setData(response));
+    console.log(process.env.NEXT_PUBLIC_APP_ENV)
   }, []);
 
   return (

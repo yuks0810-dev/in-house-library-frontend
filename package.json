@@ -1,11 +1,12 @@
 {
   "name": "in-house-library-frontend",
+  "build": "next build",
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "start:dev": "next dev",
-    "build": "next build",
-    "start": "next start",
+    "start:dev": "APP_ENV=dev next dev",
+    "start:stg": "APP_ENV=stg next dev",
+    "start:prd": "APP_ENV=prd next start",
     "lint": "next lint",
     "format": "prettier --write --ignore-path .gitignore './**/*.{js,jsx,ts,tsx,json,css}'",
     "deploy": "serverless deploy"
