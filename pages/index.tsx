@@ -35,15 +35,7 @@ const style = {
   p: 4,
 };
 
-const BookCard = (props: {
-  data:
-    | boolean
-    | React.ReactChild
-    | React.ReactFragment
-    | React.ReactPortal
-    | null
-    | undefined;
-}): JSX.Element => {
+const BookCard = (props: { data: any }): JSX.Element => {
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
@@ -58,7 +50,7 @@ const BookCard = (props: {
               color="text.primary"
               gutterBottom
             >
-              本のタイトル #{props.data}
+              {props.data["title"]}
             </Typography>
             <CardMedia
               component="img"
@@ -97,7 +89,9 @@ const BookCard = (props: {
                       処理を続行してよろしいですか？
                     </Typography>
                     <div style={{ textAlign: "right" }}>
-                      <Button variant="contained" color="success">借りる</Button>
+                      <Button variant="contained" color="success">
+                        借りる
+                      </Button>
                     </div>
                   </Box>
                 </Modal>
@@ -111,33 +105,24 @@ const BookCard = (props: {
 };
 
 const Home: NextPage = () => {
-  const [data, setData] = React.useState<Array<Number>>([]);
+  const [data, setData] = React.useState([]);
+
   React.useEffect(() => {
-    const fetchData: Array<Number> = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
-    setData(fetchData);
+    fetch("http://localhost:5001/books")
+      .then((res) => res.json())
+      .then((response) => setData(response));
   }, []);
 
   return (
     <SideBar>
-      <Grid item xs={8}>
-        <div>
-          <Head>
-            <title>Index Page</title>
-          </Head>
-          <main style={{ padding: "100px 100px" }}>
-            <Box sx={{ flexGrow: 1 }}>
-              <Grid container spacing={3}>
-                {data.map(
-                  (_, index): JSX.Element => (
-                    <Grid item xs={2} key={index}>
-                      <BookCard data={_} />
-                    </Grid>
-                  )
-                )}
-              </Grid>
-            </Box>
-          </main>
-        </div>
+      <Grid container spacing={3}>
+        {data.map(
+          (_, index): JSX.Element => (
+            <Grid item xs={2} key={index}>
+              <BookCard data={_} />
+            </Grid>
+          )
+        )}
       </Grid>
     </SideBar>
   );
