@@ -60,6 +60,7 @@ sketch
 ### Serverless ###
 # Ignore build directory
 .serverless
+.serverless_nextjs
 
 
 # ENV files
