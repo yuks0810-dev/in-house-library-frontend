@@ -1,8 +1,8 @@
 module.exports = {
   env: {
-    ...require(`./config/${process.env.APP_ENV || 'dev'}.json`),
+    ...require(`./config/${process.env.APP_ENV || "dev"}.json`),
   },
-}
+};
 
 // module.exports = function (...args) {
 //   let original = require("./next.config.original.1648124561154.js");
