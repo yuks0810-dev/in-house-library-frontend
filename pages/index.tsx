@@ -106,12 +106,11 @@ const BookCard = (props: { data: any }): JSX.Element => {
 
 const Home: NextPage = () => {
   const [data, setData] = React.useState([]);
-
+  console.log(`${process.env.API_ORIGIN}/books`);
   React.useEffect(() => {
-    fetch(`${process.env.NEXT_PUBLIC_API_ORIGIN}/books`)
+    fetch(`${process.env.API_ORIGIN}/books`)
       .then((res) => res.json())
       .then((response) => setData(response));
-    console.log(process.env.NEXT_PUBLIC_APP_ENV)
   }, []);
 
   return (
