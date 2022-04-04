@@ -37,10 +37,6 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 
-
-# Created by https://www.toptal.com/developers/gitignore/api/nextjs,react
-# Edit at https://www.toptal.com/developers/gitignore?templates=nextjs,react
-
 ### NextJS ###
 # Next build dir
 .next/
@@ -61,4 +57,11 @@ psd
 thumb
 sketch
 
-# End of https://www.toptal.com/developers/gitignore/api/nextjs,react
+### Serverless ###
+# Ignore build directory
+.serverless
+.serverless_nextjs
+
+
+# ENV files
+.env
